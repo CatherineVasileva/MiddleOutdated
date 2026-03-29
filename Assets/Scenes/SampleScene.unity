@@ -128,6 +128,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 419051824786601096, guid: d612c45e417909f44be4083cd1528bab, type: 3}
   m_PrefabInstance: {fileID: 8157397015465930655}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &631771057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631771056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00d7651282572c4699cf8956f069bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 5980656040991477118, guid: 99b82ace0eacef84cb4b71af6a02eef6, type: 3}
+  _shootDelay: 1
 --- !u!114 &631771060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95140d9a9cd5b714c9e89e4d70a9b743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.05
+  _attackScript: {fileID: 631771057}
+  Speed: 0.1
+  JerkSpeed: 4
+  JerkDuration: 1.5
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +364,7 @@ GameObject:
   - component: {fileID: 944061692}
   - component: {fileID: 944061694}
   - component: {fileID: 944061693}
+  - component: {fileID: 944061695}
   m_Layer: 5
   m_Name: Jerk
   m_TagString: Untagged
@@ -411,6 +429,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944061691}
   m_CullTransparentMesh: 1
+--- !u!114 &944061695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944061691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ControlPath: <Keyboard>/leftShift
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,6 +536,7 @@ GameObject:
   - component: {fileID: 1186474462}
   - component: {fileID: 1186474464}
   - component: {fileID: 1186474463}
+  - component: {fileID: 1186474465}
   m_Layer: 5
   m_Name: Attack
   m_TagString: Untagged
@@ -569,6 +601,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186474461}
   m_CullTransparentMesh: 1
+--- !u!114 &1186474465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186474461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ControlPath: <Keyboard>/space
 --- !u!1 &1276167122
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,7 +940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 419051824786827432, guid: d612c45e417909f44be4083cd1528bab, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 419051824786827432, guid: d612c45e417909f44be4083cd1528bab, type: 3}
       propertyPath: m_LocalRotation.x
@@ -903,7 +948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 419051824786827432, guid: d612c45e417909f44be4083cd1528bab, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 419051824786827432, guid: d612c45e417909f44be4083cd1528bab, type: 3}
       propertyPath: m_LocalRotation.z
@@ -915,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 419051824786827432, guid: d612c45e417909f44be4083cd1528bab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 419051824786827432, guid: d612c45e417909f44be4083cd1528bab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

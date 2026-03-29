@@ -14,8 +14,14 @@ public class CharacterMoveSystem : ComponentSystem
         Entities.With(_moveQuery).ForEach((Entity entity, Transform transform, ref InputData inputData,ref MoveData moveData) =>
         {
             var pos = transform.position;
-            pos += new Vector3(inputData.move.x * moveData.speed, 0, inputData.move.y * moveData.speed);
+            var direction = new Vector3(inputData.move.x, 0, inputData.move.y);
+            pos += direction * moveData.speed;
             transform.position = pos;
+            if(direction != Vector3.zero)
+            {
+                transform.forward = direction;
+            }
+            
         });
     }
 }
