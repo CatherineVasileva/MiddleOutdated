@@ -9,6 +9,7 @@ public class CharacterMoveSystem : ComponentSystem
     {
        _moveQuery = GetEntityQuery(ComponentType.ReadOnly<InputData>(), ComponentType.ReadOnly<MoveData>(), typeof(Transform));
     }
+
     protected override void OnUpdate()
     {
         Entities.With(_moveQuery).ForEach((Entity entity, Transform transform, ref InputData inputData,ref MoveData moveData) =>
@@ -21,7 +22,6 @@ public class CharacterMoveSystem : ComponentSystem
             {
                 transform.forward = direction;
             }
-            
         });
     }
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 public class ShootAbility : MonoBehaviour, IAbility
 {
     [SerializeField] GameObject bullet;
-
     [SerializeField] float _shootDelay;
     private float _shootTime = float.MinValue;
 
@@ -14,7 +13,7 @@ public class ShootAbility : MonoBehaviour, IAbility
 
         if (bullet != null)
         {
-            var currentBullet = Instantiate(bullet, transform.position, transform.rotation);
+            Instantiate(bullet, transform.position, transform.rotation);
         }
         else
             Debug.LogError("Bullet field is empty");

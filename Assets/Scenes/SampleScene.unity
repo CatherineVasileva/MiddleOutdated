@@ -155,9 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackScript: {fileID: 631771057}
-  Speed: 0.1
-  JerkSpeed: 4
-  JerkDuration: 1.5
+  Speed: 0.04
+  JerkSpeed: 5
+  JerkDuration: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

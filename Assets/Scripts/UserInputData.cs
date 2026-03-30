@@ -17,11 +17,12 @@ public class UserInputData : MonoBehaviour, IConvertGameObjectToEntity
         {
             dstManager.AddComponentData(entity, new ShootData());
         }
-        //dstManager.AddComponentData(entity, new JerkData
-        //{
-        //    jerkSpeed = JerkSpeed,
-        //    jerkDuration = JerkDuration
-        //});
+        dstManager.AddComponentData(entity, new JerkData
+        {
+            jerkSpeed = JerkSpeed,
+            jerkDuration = JerkDuration,
+            canJerk = true
+        });
     }   
 }
 
@@ -47,4 +48,5 @@ public struct JerkData : IComponentData
     public float jerkSpeed;
     public float jerkDuration;
     public float timer;
+    public bool canJerk;
 }

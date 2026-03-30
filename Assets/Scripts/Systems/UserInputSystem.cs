@@ -40,7 +40,6 @@ public class UserInputSystem : ComponentSystem
 
         _jerkAction = new InputAction("Lerk", binding: "<Keyboard>/LeftShift");
         _jerkAction.started += context => { _jerkInput = context.ReadValue<float>(); };
-        _jerkAction.performed += context => { _jerkInput = context.ReadValue<float>(); };
         _jerkAction.canceled += context => { _jerkInput = context.ReadValue<float>(); };
         _jerkAction.Enable();
     }
@@ -51,6 +50,7 @@ public class UserInputSystem : ComponentSystem
         _shootAction.Disable();
         _jerkAction.Disable();
     }
+
     protected override void OnUpdate()
     {
         Entities.With(_inputQuery).ForEach((Entity entity, ref InputData inputData) =>

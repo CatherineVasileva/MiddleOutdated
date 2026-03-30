@@ -8,6 +8,7 @@ public class ShootSystem : ComponentSystem
     {
         _entityQuery = GetEntityQuery(typeof(InputData), typeof(ShootData), typeof(UserInputData));
     }
+
     protected override void OnUpdate()
     {
         Entities.With(_entityQuery).ForEach((Entity entity, UserInputData inputData, ref InputData input) =>
