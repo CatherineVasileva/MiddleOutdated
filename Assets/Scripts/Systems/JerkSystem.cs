@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Entities;
+using System.Threading;
 
 public class JerkSystem : ComponentSystem
 {
@@ -14,9 +15,15 @@ public class JerkSystem : ComponentSystem
     {
         Entities.With(_query).ForEach((Entity entity, Transform transform, ref JerkData jerkData,ref InputData input) =>
         {
-            if(input.jerk > 0 && jerkData.canJerk && jerkData.timer <= 0)
+            if(jerkData.timerBetweenJerks > 0)
             {
-                jerkData.timer = jerkData.jerkDuration;
+                jerkData.timerBetweenJerks -= Time.DeltaTime;
+            }
+
+            if(input.jerk > 0 && jerkData.canJerk && jerkData.timerJerkDuration <= 0 && jerkData.timerBetweenJerks <=0)
+            {
+                jerkData.timerJerkDuration = jerkData.jerkDuration;
+                jerkData.timerBetweenJerks = jerkData.timeToJerkAgain;
                 jerkData.canJerk = false; 
             }
 
@@ -25,10 +32,10 @@ public class JerkSystem : ComponentSystem
                 jerkData.canJerk = true;
             }
 
-            if (jerkData.timer > 0)
+            if (jerkData.timerJerkDuration > 0)
             {
                 transform.Translate(Vector3.forward * jerkData.jerkSpeed * Time.DeltaTime);
-                jerkData.timer -= Time.DeltaTime;
+                jerkData.timerJerkDuration -= Time.DeltaTime;
                     Debug.Log("jerk is performing");
             }
         });

@@ -8,6 +8,7 @@ public class UserInputData : MonoBehaviour, IConvertGameObjectToEntity
     public float Speed;
     public float JerkSpeed;
     public float JerkDuration;
+    public float TimeToJerkAgain;
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
@@ -21,7 +22,8 @@ public class UserInputData : MonoBehaviour, IConvertGameObjectToEntity
         {
             jerkSpeed = JerkSpeed,
             jerkDuration = JerkDuration,
-            canJerk = true
+            canJerk = true,
+            timeToJerkAgain = TimeToJerkAgain
         });
     }   
 }
@@ -47,6 +49,8 @@ public struct JerkData : IComponentData
 {
     public float jerkSpeed;
     public float jerkDuration;
-    public float timer;
+    public float timerJerkDuration;
     public bool canJerk;
+    public float timeToJerkAgain;
+    public float timerBetweenJerks;
 }
