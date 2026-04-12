@@ -1,9 +1,14 @@
+using System;
 using UnityEngine;
 
 public class ShootAbility : MonoBehaviour, IAbility
 {
     [SerializeField] GameObject bullet;
     [SerializeField] float _shootDelay;
+    [SerializeField] float BulBouncePerkDuration;
+
+    [NonSerialized] public float BulBouncePerkStart = float.MinValue;
+    
     private float _shootTime = float.MinValue;
 
     public void Execute()
@@ -13,7 +18,12 @@ public class ShootAbility : MonoBehaviour, IAbility
 
         if (bullet != null)
         {
-            Instantiate(bullet, transform.position, transform.rotation);
+           var currentBullet = Instantiate(bullet, transform.position, transform.rotation);
+
+                if(Time.time < BulBouncePerkStart + BulBouncePerkDuration)
+                {
+                    currentBullet.GetComponent<BulletData>().isAbleToBounce = true;
+                }
         }
         else
             Debug.LogError("Bullet field is empty");

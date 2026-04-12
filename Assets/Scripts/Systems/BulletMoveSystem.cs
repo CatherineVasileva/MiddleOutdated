@@ -14,6 +14,7 @@ public class BulletMoveSystem : ComponentSystem
     {
         Entities.With(_query).ForEach((Entity entity, Transform transform,ref MoveData moveData) =>
         {
+            if (transform == null) return;
             transform.Translate(Vector3.forward * moveData.speed * Time.DeltaTime);
         });
     }

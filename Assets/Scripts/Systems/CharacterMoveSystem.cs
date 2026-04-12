@@ -16,7 +16,7 @@ public class CharacterMoveSystem : ComponentSystem
         {
             var pos = transform.position;
             var direction = new Vector3(inputData.move.x, 0, inputData.move.y);
-            pos += direction * moveData.speed;
+            pos += direction * moveData.speed *Time.DeltaTime;
             transform.position = pos;
             if(direction != Vector3.zero)
             {

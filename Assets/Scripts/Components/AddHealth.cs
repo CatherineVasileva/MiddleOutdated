@@ -1,24 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Entities;
 
 public class AddHealth : MonoBehaviour, IAbilityTarget
 {
+    [SerializeField] float Damage;
     public List<Collider> Targets { get; set; }
 
     public void Execute()
     {
         foreach (var target in Targets)
         {
-            if (target.gameObject.TryGetComponent<GameObjectEntity>(out var goEntity))
+            if (target.gameObject.TryGetComponent<CharacterHealth>(out var targetHealth))
             {
-                Entity entity = goEntity.Entity;
-                Debug.Log(entity);
+                targetHealth.Health -= Damage;
+                Destroy(gameObject);
             }
             else
-            { Debug.Log("Содержимое списка: " + string.Join(", ", Targets)); }
+                Debug.Log("CharacterHealth isn't found");
         }
-
-        Debug.Log("Health added, it must be destroyed");
     }
 }

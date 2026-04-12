@@ -20,7 +20,10 @@ public class CollisionSystem : ComponentSystem
         Entities.With(_collisionQuery).ForEach(
             (Entity entity, CollisionAbility collisionAbility, ref ActorColliderData colliderData) =>
         {
+            if (collisionAbility == null) return;
             var gameObject = collisionAbility.gameObject;
+            if (gameObject == null) return; 
+
             float3 position = gameObject.transform.position;
             Quaternion rotation = gameObject.transform.rotation;
 
