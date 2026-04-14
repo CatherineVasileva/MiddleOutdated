@@ -12,8 +12,10 @@ public class AddHealth : MonoBehaviour, IAbilityTarget
         {
             if (target.gameObject.TryGetComponent<CharacterHealth>(out var targetHealth))
             {
-                targetHealth.Health -= Damage;
+                targetHealth.AddHealth(Damage);
+                gameObject.SetActive(false);
                 Destroy(gameObject);
+                break;
             }
             else
                 Debug.Log("CharacterHealth isn't found");

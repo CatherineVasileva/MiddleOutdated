@@ -143,6 +143,8 @@ MonoBehaviour:
   bullet: {fileID: 5980656040991477118, guid: 99b82ace0eacef84cb4b71af6a02eef6, type: 3}
   _shootDelay: 1
   BulBouncePerkDuration: 20
+  stats:
+    ShotCounts: 0
 --- !u!114 &631771060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e8626659d89c241b5186c15aad983f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  health: 50
 --- !u!136 &631771063
 CapsuleCollider:
   m_ObjectHideFlags: 0

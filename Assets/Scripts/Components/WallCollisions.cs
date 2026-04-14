@@ -12,18 +12,15 @@ public class WallCollisions : MonoBehaviour, IAbilityTarget
     {
         foreach (var target in Targets)
         { 
-            if (target.TryGetComponent<BulletData>(out var bullet))
+            if (target.TryGetComponent<IBounceAbility>(out var bounceAbility))
             {
-                if (bullet.isAbleToBounce) 
+                if (bounceAbility.IsAbleToBounce)
                 {
-                    var direction = Vector3.Reflect(target.transform.forward.normalized, ChosenDirection.normalized);
-                    target.transform.forward = direction;
+                    bounceAbility.ReflectDirection(ChosenDirection);
                 }
-                else 
-                    Destroy(bullet.gameObject);
+                else
+                    bounceAbility.Execute();
             }
-            else
-                Debug.Log("not a bullet");
         }
     }
    

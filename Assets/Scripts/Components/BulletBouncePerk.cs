@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,10 +9,12 @@ public class BulletBouncePerk : MonoBehaviour, IAbilityTarget
     {
         foreach (var target in Targets)
         {
-            if (target.gameObject.TryGetComponent<ShootAbility>(out var shootAbility))
+            if (target.gameObject.TryGetComponent<IPerkHandler>(out var perkHandler))
             {
-                shootAbility.BulBouncePerkStart = Time.time;
+                perkHandler.ActivatePerk();
+                gameObject.SetActive(false);
                 Destroy(gameObject);
+                break;
             }
             else
                 Debug.Log("ShootAbility isn't found");
