@@ -4,7 +4,7 @@ using UnityEngine;
 public class BulletData : MonoBehaviour, IConvertGameObjectToEntity, IBounceAbility
 {
     [SerializeField] float Speed;
-    private float TimeToDestroy;
+    [SerializeField] float TimeToDestroy;
 
     public bool IsAbleToBounce { get; set; } = false;
 
