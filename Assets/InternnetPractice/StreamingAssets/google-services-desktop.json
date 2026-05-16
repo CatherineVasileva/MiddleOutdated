@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1058677077010",
+    "firebase_url": "https://middle-outdatedproject-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "middle-outdatedproject",
+    "storage_bucket": "middle-outdatedproject.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058677077010:android:c1f93183b9eb7b69fe94cb",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.Middleoutdated"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWn48gx6h3Y3E8sICESvtqGGaHOsUyc0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

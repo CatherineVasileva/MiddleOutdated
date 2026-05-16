@@ -12,16 +12,17 @@ public class WallCollisions : MonoBehaviour, IAbilityTarget
     {
         foreach (var target in Targets)
         { 
-            if (target.TryGetComponent<IBounceAbility>(out var bounceAbility))
+            if (target != null && target.TryGetComponent<IBounceAbility>(out var bounceAbility))
             {
-                if (bounceAbility.IsAbleToBounce)
+                if (!bounceAbility.IsAbleToBounce)
                 {
-                    bounceAbility.ReflectDirection(ChosenDirection);
+                    bounceAbility.Execute();
                 }
                 else
-                    bounceAbility.Execute();
+                    return;
             }
         }
+        Targets.Clear();
     }
    
     public enum WallOrientation

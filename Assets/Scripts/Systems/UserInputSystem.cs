@@ -1,63 +1,48 @@
-using Unity.Entities;
 using UnityEngine.InputSystem;
-using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
-public class UserInputSystem : ComponentSystem
+public class UserInputSystem : MonoBehaviour
 {
-    private EntityQuery _inputQuery;
-    private InputAction _moveAction;
-    private InputAction _shootAction;
-    private InputAction _jerkAction;
-    private float2 _moveInput;
+    private NewControls _gameInput;
+    private IMoveable _moveController;
+    private IAbility _shootAbility;
+
+    private Vector2 _moveInput;
     private float _shootInput;
     private float _jerkInput;
+    public Vector2 MoveInput => _moveInput;
+    public float ShootInput => _shootInput;
+    public float JerkInput => _jerkInput;
 
-    protected override void OnCreate()
+    private void Awake()
     {
-        _inputQuery = GetEntityQuery(ComponentType.ReadOnly<InputData>());
+        _gameInput = new NewControls();
+        _gameInput.Enable();
+        _moveController = GetComponent<IMoveable>();
+        _shootAbility = GetComponent<IAbility>();
+    }
+    private void OnEnable()
+    {
+        _gameInput.Map1.shoot.performed += Attack;
     }
 
-    protected override void OnStartRunning()
+    private void OnDisable()
     {
-        _moveAction = new InputAction("move", binding: "<Gamepad>/rightStick");
-        _moveAction.AddCompositeBinding("Dpad")
-            .With("Up", "<Keyboard>/w")
-            .With("Down", "<Keyboard>/s")
-            .With("Left", "<Keyboard>/a")
-            .With("Right", "<Keyboard>/d");
-
-        _moveAction.performed += context => { _moveInput = context.ReadValue<Vector2>(); };
-        _moveAction.started += context => { _moveInput = context.ReadValue<Vector2>(); };
-        _moveAction.canceled += context => { _moveInput = context.ReadValue<Vector2>(); };
-        _moveAction.Enable();
-
-        _shootAction = new InputAction("shoot", binding: "<Keyboard>/Space");
-        _shootAction.started += context => { _shootInput = context.ReadValue<float>(); };
-        _shootAction.performed += context => { _shootInput = context.ReadValue<float>(); };
-        _shootAction.canceled += context => { _shootInput = context.ReadValue<float>(); };
-        _shootAction.Enable();
-
-        _jerkAction = new InputAction("Lerk", binding: "<Keyboard>/LeftShift");
-        _jerkAction.started += context => { _jerkInput = context.ReadValue<float>(); };
-        _jerkAction.canceled += context => { _jerkInput = context.ReadValue<float>(); };
-        _jerkAction.Enable();
+        _gameInput.Map1.shoot.performed -= Attack;
     }
 
-    protected override void OnStopRunning()
+    private void Update()
     {
-        _moveAction.Disable();
-        _shootAction.Disable();
-        _jerkAction.Disable();
+        _moveInput = _gameInput.Map1.move.ReadValue<Vector2>();
+    }
+    private void FixedUpdate()
+    {
+        _moveController.Move(_moveInput);
     }
 
-    protected override void OnUpdate()
+    private void Attack(InputAction.CallbackContext context)
     {
-        Entities.With(_inputQuery).ForEach((Entity entity, ref InputData inputData) =>
-        {
-            inputData.move = _moveInput;
-            inputData.shoot = _shootInput;
-            inputData.jerk = _jerkInput;
-        });
+        _shootAbility.Execute();
     }
 }

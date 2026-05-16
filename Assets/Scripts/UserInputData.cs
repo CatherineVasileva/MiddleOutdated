@@ -1,8 +1,6 @@
-using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 
-public class UserInputData : MonoBehaviour, IConvertGameObjectToEntity
+public class UserInputData : MonoBehaviour
 {
     public MonoBehaviour _attackScript;
     public float Speed;
@@ -11,43 +9,22 @@ public class UserInputData : MonoBehaviour, IConvertGameObjectToEntity
     public float TimeToJerkAgain;
    // public float Health;
 
-    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
-    {
-        dstManager.AddComponentData(entity, new InputData());
-        dstManager.AddComponentData(entity, new MoveData { speed = Speed });
-        if (_attackScript != null && _attackScript is IAbility)
-        {
-            dstManager.AddComponentData(entity, new ShootData());
-        }
-        dstManager.AddComponentData(entity, new JerkData
-        {
-            jerkSpeed = JerkSpeed,
-            jerkDuration = JerkDuration,
-            canJerk = true,
-            timeToJerkAgain = TimeToJerkAgain
-        });
-       //dstManager.AddComponentData(entity, new PlayerHealth { health = Health });
-    }   
+   
 }
 
-public struct InputData : IComponentData
+public struct InputData 
     {
-        public float2 move;
+        public Vector2 move;
         public float shoot;
         public float jerk;
     }
 
-public struct MoveData : IComponentData
+public struct MoveData 
 {
     public float speed;
 }
 
-public struct ShootData : IComponentData
-{
-
-}
-
-public struct JerkData : IComponentData
+public struct JerkData 
 {
     public float jerkSpeed;
     public float jerkDuration;
@@ -57,7 +34,7 @@ public struct JerkData : IComponentData
     public float timerBetweenJerks;
 }
 
-public struct PlayerHealth : IComponentData
+public struct PlayerHealth 
 {
     public float health;
 }

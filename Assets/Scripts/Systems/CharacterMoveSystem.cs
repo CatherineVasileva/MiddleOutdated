@@ -1,27 +1,20 @@
-using Unity.Entities;
 using UnityEngine;
 
-public class CharacterMoveSystem : ComponentSystem
+public class CharacterMoveSystem : MonoBehaviour, IMoveable
 {
-    private EntityQuery _moveQuery;
+    [SerializeField] float _speed;
 
-    protected override void OnCreate()
-    {
-       _moveQuery = GetEntityQuery(ComponentType.ReadOnly<InputData>(), ComponentType.ReadOnly<MoveData>(), typeof(Transform));
-    }
 
-    protected override void OnUpdate()
+    public void Move(Vector2 direction)
     {
-        Entities.With(_moveQuery).ForEach((Entity entity, Transform transform, ref InputData inputData,ref MoveData moveData) =>
-        {
-            var pos = transform.position;
-            var direction = new Vector3(inputData.move.x, 0, inputData.move.y);
-            pos += direction * moveData.speed *Time.DeltaTime;
-            transform.position = pos;
-            if(direction != Vector3.zero)
+        var pos = transform.position;
+        var newDirection = new Vector3(direction.x, 0, direction.y);
+        pos += newDirection * _speed * Time.deltaTime;
+        transform.position = pos;
+           
+        if(newDirection != Vector3.zero)
             {
-                transform.forward = direction;
+                transform.forward = newDirection;
             }
-        });
     }
 }

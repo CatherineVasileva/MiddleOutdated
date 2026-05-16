@@ -1,17 +1,16 @@
-using Unity.Entities;
 using UnityEngine;
 
-public class BulletData : MonoBehaviour, IConvertGameObjectToEntity, IBounceAbility
+public class BulletData : MonoBehaviour, IBounceAbility
 {
     [SerializeField] float Speed;
     [SerializeField] float TimeToDestroy;
-
+    private Rigidbody rb;
     public bool IsAbleToBounce { get; set; } = false;
 
-    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+    private void Start()
     {
-        dstManager.AddComponentData(entity, new MoveData { speed = Speed }) ;
-        dstManager.AddComponentData(entity, new FreeFlight());
+        rb = GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * Speed, ForceMode.Impulse);
     }
 
     public void Execute()
@@ -19,12 +18,12 @@ public class BulletData : MonoBehaviour, IConvertGameObjectToEntity, IBounceAbil
         Destroy(gameObject);
     }
 
-    public void ReflectDirection(Vector3 chosenDirection)
-    {
-        var direction = Vector3.Reflect(transform.forward.normalized, chosenDirection.normalized);
-        transform.forward = direction;
-        Debug.Log("ReflectDirection");
-    }
+    //public void ReflectDirection(Vector3 chosenDirection)
+    //{
+    //    var direction = Vector3.Reflect(transform.forward.normalized, chosenDirection.normalized);
+    //    transform.forward = direction;
+    //    Debug.Log("ReflectDirection");
+    //}
 
     public void Update()
     {
@@ -34,10 +33,10 @@ public class BulletData : MonoBehaviour, IConvertGameObjectToEntity, IBounceAbil
             Destroy(gameObject);
         }
     }
+
+    //private void FixedUpdate()
+    //{
+    //    transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+    //}
 }
-
-public struct FreeFlight : IComponentData
-    {
-
-    }
 

@@ -101,3 +101,14 @@ InitTestScene*.unity*
 .vsconfig
 Assets/UnityGoogleDrive.meta
 Assets/UnityGoogleDrive/
+**/GoogleDriveSettings.asset
+
+# === Firebase ===
+# Секретные ключи администратора (на всякий случай)
+*.secret.json
+*credentials*.json
+firebase-adminsdk*.json
+
+# Локальные логи и кэш инструментов Firebase
+.firebase/
+firebase-debug.log

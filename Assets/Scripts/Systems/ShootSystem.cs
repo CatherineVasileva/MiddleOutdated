@@ -1,19 +1,13 @@
-using Unity.Entities;
+using UnityEngine;
 
-public class ShootSystem : ComponentSystem
+public class ShootSystem : MonoBehaviour
 {
-    private EntityQuery _entityQuery;
 
-    protected override void OnCreate()
-    {
-        _entityQuery = GetEntityQuery(typeof(InputData), typeof(ShootData), typeof(UserInputData));
-    }
-
-    protected override void OnUpdate()
-    {
-        Entities.With(_entityQuery).ForEach((Entity entity, UserInputData inputData, ref InputData input) =>
-        {
-            if(input.shoot >0f && inputData._attackScript != null && inputData._attackScript is IAbility ability) { ability.Execute(); }
-        });
-    }
+    //protected override void OnUpdate()
+    //{
+    //    Entities.With(_entityQuery).ForEach((Entity entity, UserInputData inputData, ref InputData input) =>
+    //    {
+    //        if(input.shoot >0f && inputData._attackScript != null && inputData._attackScript is IAbility ability) { ability.Execute(); }
+    //    });
+    //}
 }

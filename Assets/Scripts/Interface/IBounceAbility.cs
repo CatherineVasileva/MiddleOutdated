@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IBounceAbility : IAbility
 {
     bool IsAbleToBounce { get; set; }
-    void ReflectDirection(Vector3 direction);
+    //void ReflectDirection(Vector3 direction);
 }
